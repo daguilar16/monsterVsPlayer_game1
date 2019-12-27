@@ -11,7 +11,11 @@ player = {'name': 'Dave', 'attack': 10, 'heal': 16, 'health': 100}
 monster = {'name':'Maximus', 'attack': 12, 'health': 100}
 gameRunning = True
 
+
 while gameRunning == True:
+
+    playerWon = False
+    monsterWon = False
 
     print('Please select action')
     print('1. Attack')
@@ -21,7 +25,13 @@ while gameRunning == True:
 
     if playerChoise == str(1): 
         monster['health'] = monster['health'] - player['attack']
-        player['health'] = player['health'] - monster['attack']
+        if monster['health'] <= 0:
+            playerWon = True
+        else:
+            player['health'] = player['health'] - monster['attack']
+            if player['health']<= 0:
+                monsterWon = True
+
         print (monster['health'])
         print (player['health'])
 
@@ -30,6 +40,7 @@ while gameRunning == True:
     else: 
         print('Invalid input')
 
-    if player['health'] <= 0:
+    if playerWon == True or monsterWon == True: 
         gameRunning = False
+
 
