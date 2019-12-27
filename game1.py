@@ -1,46 +1,75 @@
-#playerName = "Dave"
-#playerAttack = 10
-#playerHeal = 16
-#playerHealth = 100
+# import randint for random a number between a min and a max value
+from random import randint
 
-#LIST:
-#player = ['Dave', 10, 16, 100]
-
-#DICTIONARY: 
-player = {'name': 'Dave', 'attack': 10, 'heal': 16, 'health': 100}
-monster = {'name':'Maximus', 'attack': 12, 'health': 100}
 gameRunning = True
 
+#Function: 
+def monterAttak_Value():
+    return randint(monster['attackMin'], monster['attackMax'])
+    
 
 while gameRunning == True:
+    newRound = True
+    #DICTIONARY: 
+    player = {'name': 'Dave', 'attack': 10, 'heal': 16, 'health': 100}
+    monster = {'name':'Maximus', 'attackMin': 12, 'attackMax': 20, 'health': 100}
 
-    playerWon = False
-    monsterWon = False
+    print('-#-' * 25)
+    print('Enter player name: ')
+    player['name'] = input()
+    print(player['name'] + ' has ' + str(player['health']) + ' of health' )
+    print(monster['name'] + ' has ' + str(monster['health']) + ' of health' )
+    print()
+    while newRound == True:
 
-    print('Please select action')
-    print('1. Attack')
-    print('2. Heal')
+        playerWon = False
+        monsterWon = False
 
-    playerChoise = input()
+        print('-#-' * 25)
+        print('Please select action')
+        print('1. Attack')
+        print('2. Heal')
+        print('3. Exit game')
 
-    if playerChoise == str(1): 
-        monster['health'] = monster['health'] - player['attack']
-        if monster['health'] <= 0:
-            playerWon = True
-        else:
-            player['health'] = player['health'] - monster['attack']
-            if player['health']<= 0:
+        playerChoise = input()
+
+        if playerChoise == str(1): 
+            monster['health'] = monster['health'] - player['attack']
+            if monster['health'] <= 0:
+                playerWon = True
+
+            else:
+                player['health'] = player['health'] - monterAttak_Value()
+                if player['health']<= 0:
+                    monsterWon = True
+
+        elif playerChoise == str(2):
+            player['health'] =  player['health'] + player['heal']
+            player['health'] = player['health'] - monterAttak_Value()
+            if player['health'] <= 0:
                 monsterWon = True
+                    
+        elif playerChoise == str(3):
+            gameRunning = False
+            newRound = False
+            
+        else: 
+            print('Invalid input')
 
-        print (monster['health'])
-        print (player['health'])
+        if playerWon == False and monsterWon == False:
+            print(player['name'] + ' has ' + str(player['health']) + ' of health left')
+            print(monster['name'] + ' has ' + str(monster['health']) + ' of health left')
+            print()
+        
+        elif playerWon: 
+            print(player['name'] + ' won!!')
+            newRound = False
 
-    elif playerChoise == str(2):
-        print('Heal player')
-    else: 
-        print('Invalid input')
+        elif monsterWon: 
+            print(monster['name'] + ' won!!')
+            newRound = False
 
-    if playerWon == True or monsterWon == True: 
-        gameRunning = False
+
+
 
 
