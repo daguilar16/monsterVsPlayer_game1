@@ -6,9 +6,13 @@ gameRunning = True
 #Function: 
 def monterAttak_Value():
     return randint(monster['attackMin'], monster['attackMax'])
+
+def gameEnds(winnerName):
+    print('The winner of the game is: ' + winnerName)
+
     
 
-while gameRunning == True:
+while gameRunning == True: 
     newRound = True
     #DICTIONARY: 
     player = {'name': 'Dave', 'attack': 10, 'heal': 16, 'health': 100}
@@ -62,11 +66,11 @@ while gameRunning == True:
             print()
         
         elif playerWon: 
-            print(player['name'] + ' won!!')
+            gameEnds(player['name'])
             newRound = False
 
         elif monsterWon: 
-            print(monster['name'] + ' won!!')
+            gameEnds(monster['name'])
             newRound = False
 
 
